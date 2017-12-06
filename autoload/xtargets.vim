@@ -32,7 +32,7 @@ function xtargets#set_target(target)
 
 	if g:xtargets#set_compiler
 		if s:ExistsRTP('compiler/'.l:exec_name.'.vim')
-			execute 'compiler '.l:exec_name
+			execute 'compiler' l:exec_name
 		else
 			compiler gcc
 		endif
