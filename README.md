@@ -28,11 +28,11 @@ For full documentation, see the Vim on-line documentation (`:help xtargets`).
 
 ## About
 
-vim-xtargets v0.4
+vim-xtargets v0.5
 
 Copyright (c) 2017 Josh Klodnicki  
 MIT License  
-See `LICENSE.txt` for full license.
+See `doc/xtargets-license.txt` for full license.
 
 Get the latest version, report bugs, or contribute at
 <http://github.com/joshklod/vim-xtargets>.

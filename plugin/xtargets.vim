@@ -2,13 +2,12 @@
 " Description: Easy switching between GCC cross-compilation targets
 " Author:      Josh Klodnicki <joshklod@gmail.com>
 " Modified:    6 Dec 2017
-" Version:     0.4
-" License:     MIT License (See LICENSE.txt)
+" Version:     0.5
+" License:     MIT License (See doc/xtargets-license.txt)
 "
 " TODO
 " - Autocommands and target detection mechanism
 " - More portable 'path'
-" - Move (or copy) license to vim help file
 
 if exists("g:loaded_xtargets")
 	finish

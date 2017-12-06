@@ -1,4 +1,4 @@
-*xtargets.txt*	Easy switching between GCC cross-compilation targets
+*xtargets.txt*		Easy switching between GCC cross-compilation targets
 
 				     *xtargets* *vim-xtargets* *xtargets-help*
 CONTENTS					       *xtargets-contents*
@@ -146,12 +146,12 @@ The following configuration variables are available:
 ==============================================================================
 ABOUT							      *xtargets-about*
 
-vim-xtargets v0.4
+vim-xtargets v0.5
 
 							    *xtargets-license*
 Copyright (c) 2017 Josh Klodnicki
 MIT License
-See LICENSE.txt for full license.
+See |xtargets-license.txt| for full license.
 
 								*xtargets-url*
 Get the latest version, report bugs, or contribute at

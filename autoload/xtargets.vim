@@ -1,6 +1,6 @@
 " Name:    vim-xtargets
 " Author:  Josh Klodnicki <joshklod@gmail.com>
-" License: MIT License (See LICENSE.txt)
+" License: MIT License (See doc/xtargets-license.txt)
 "
 " See plugin/xtargets.vim
 
