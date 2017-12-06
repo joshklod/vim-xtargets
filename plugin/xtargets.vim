@@ -1,13 +1,14 @@
 " Name:        vim-xtargets
 " Description: Easy switching between GCC cross-compilation targets
 " Author:      Josh Klodnicki <joshklod@gmail.com>
-" Modified:    5 Dec 2017
-" Version:     0.2
+" Modified:    6 Dec 2017
+" Version:     0.3
 " License:     MIT License (See LICENSE.txt)
 "
 " TODO
-" - Documentation
 " - Autocommands and target detection mechanism
+" - More portable 'path'
+" - Move (or copy) license to vim help file
 
 if exists("g:loaded_xtargets")
 	finish

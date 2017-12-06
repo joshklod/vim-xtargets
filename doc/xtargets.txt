@@ -1,0 +1,160 @@
+*xtargets.txt*	Easy switching between GCC cross-compilation targets
+
+				     *xtargets* *vim-xtargets* *xtargets-help*
+CONTENTS					       *xtargets-contents*
+
+Introduction		|xtargets-introduction|
+Usage			|xtargets-usage|
+Features		|xtargets-features|
+Commands		|xtargets-commands|
+Configuration		|xtargets-configuration|
+About			|xtargets-about|
+
+==============================================================================
+INTRODUCTION					       *xtargets-introduction*
+
+xtargets provides a convenient command to set compiler-related options for
+multiple cross-compilation targets.  The plugin is designed for GCC, though it
+is likely useful for other compilers with some modification.
+
+Currently, xtargets can set the following options (|xtargets-features|):
+  - `:compiler`		|xtargets-compiler|
+  - 'makeprg'		|xtargets-makeprg|
+  - 'path'		|xtargets-path|
+
+==============================================================================
+USAGE							      *xtargets-usage*
+
+To use the plugin, all you need to do is run the `:Target` command.  For
+example:
+>
+    :Target arm-none-eabi
+<
+By default, this will set `:compiler`, 'makeprg', and 'path' to appropriate
+values for the specified target.  For details on how this is done, see
+|xtargets-features|.  To customize which options are affected by the `:Target`
+command, see |xtargets-configuration|.
+
+==============================================================================
+FEATURES						   *xtargets-features*
+
+Currently, xtargets has the following features:
+
+							   *xtargets-compiler*
+    `:compiler`		xtargets will automatically determine the best
+			argument to `:compiler`, then run the command.
+
+			Normally, this is simply "gcc".  However, xtargets
+			will first search 'runtimepath' for any
+			target-specific compiler plugins.  These can be added
+			by creating a file called "{target}-gcc.vim", and
+			adding it to the "compiler/" directory.  If one is
+			found, it is used.  Otherwise, the default is "gcc",
+			which should be sufficient for most purposes.
+
+			This feature can be disabled with: >
+			    :let g:xtargets#set_compiler = 0
+<			(|xtargets-configuration|)
+
+							    *xtargets-makeprg*
+    'makeprg'		`:Target` can automatically set 'makeprg' so that the
+			appropriate cross-compiler executable is run with
+			`:make`.
+
+			If xtargets determines that 'makeprg' needs to be set
+			(see below), it is set to "{target}-gcc %".  Assuming
+			the appropriate cross-compiler is properly installed
+			on your system and in your $PATH, the command should
+			compile the current file.
+
+			xtargets tries not to break any working make
+			configurations, even when this option is enabled.  If
+			'makeprg' contains "make" and there is a makefile in
+			the working directory, xtargets assumes that this is
+			the desired behavior.  In this case `:Target` will
+			leave 'makeprg' untouched.  To force xtargets to set
+			'makeprg' anyway, use xtargets#force_makeprg: >
+			    :let g:xtargets#force_makeprg = 1
+<			(|xtargets-configuration|)
+
+			This feature can be disabled with: >
+			    :let g:xtargets#set_makeprg = 0
+<			(|xtargets-configuration|)
+
+							       *xtargets-path*
+    'path'		`:Target` can set 'path' to point to the appropriate
+			header files for the target system.  These files will
+			then be found with "gf", `:find`, etc.
+
+			On most systems, header files are found in
+			subdirectories of "/usr" and "/usr/local".  Currently,
+			xtargets assumes that this is the case.  Compiler
+			headers are assumed to be in
+			"lib/gcc/{target}/{compiler-version}/include" and
+			"lib/gcc/{target}/{compiler-version}/include-fixed"
+			(* Note).  Target headers are assumed to be in
+			"{target}/include".
+
+			If your setup is different from the above, this
+			feature will not work for you, and should be disabled
+			(|xtargets-configuration|).  This may be improved in a
+			later version (if the maintainer ever feels like it).
+			For the ambitious, feel free to fix it yourself and
+			submit a patch (|xtargets-url|).
+
+			Note
+			    xtargets matches any {compiler-version} with
+			    |file-searching| wildcards, which require the
+			    |+path_extra| feature.  If your build of Vim does
+			    not include that feature, these paths will be left
+			    out of 'path' and compiler headers will not be
+			    found.
+
+			This feature can be disabled with: >
+			    :let g:xtargets#set_path = 0
+<			(|xtargets-configuration|)
+
+==============================================================================
+COMMANDS						   *xtargets-commands*
+
+							    *xtargets-:Target*
+:Target {target}	Set options for target platform {target}.  {target}
+			should be the standard autoconf-style canonical name
+			of the form "cpu-vendor[-kernel]-os", such as
+			"x86_64-pc-linux-gnu" or "arm-none-eabi".  Which
+			options are affected depends on the configuration
+			variables (|xtargets-configuration|).  By default,
+			sets `:compiler`, 'makeprg', and 'path'.  See
+			|xtargets-features| for details.
+
+==============================================================================
+CONFIGURATION					      *xtargets-configuration*
+
+The following configuration variables are available:
+
+    Variable Name	    Default  Description ~
+    g:xtargets#set_compiler	1    Enable setting `:compiler`
+				     (|xtargets-compiler|)
+    g:xtargets#set_makeprg	1    Enable setting 'makeprg'
+				     (|xtargets-makeprg|)
+    g:xtargets#set_path		1    Enable setting 'path' (|xtargets-path|)
+    g:xtargets#force_makeprg	0    Force setting 'makeprg' (when enabled).
+				     When this option is set, `:Target` will
+				     set 'makeprg' even if make is being used.
+				     See |xtargets-makeprg| for details.
+
+==============================================================================
+ABOUT							      *xtargets-about*
+
+vim-xtargets v0.3
+
+							    *xtargets-license*
+Copyright (c) 2017 Josh Klodnicki
+MIT License
+See LICENSE.txt for full license.
+
+								*xtargets-url*
+Get the latest version, report bugs, or contribute at
+http://github.com/joshklod/xtargets.
+
+ vim:tw=78:ts=8:ft=help:norl:
