@@ -2,7 +2,7 @@
 " Description: Easy switching between GCC cross-compilation targets
 " Author:      Josh Klodnicki <joshklod@gmail.com>
 " Modified:    6 Dec 2017
-" Version:     0.3
+" Version:     0.4
 " License:     MIT License (See LICENSE.txt)
 "
 " TODO
